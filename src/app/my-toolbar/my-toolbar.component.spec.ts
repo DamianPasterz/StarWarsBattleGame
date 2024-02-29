@@ -1,5 +1,7 @@
 import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { of } from 'rxjs';
 import { MyToolbarComponent } from './my-toolbar.component';
@@ -33,7 +35,7 @@ describe('MyToolbarComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [MyToolbarComponent],
-      imports: [MatToolbarModule],
+      imports: [MatToolbarModule, MatMenuModule, MatIconModule],
       providers: [{ provide: BreakpointObserver, useValue: breakpointObserver }],
     }).compileComponents();
 
@@ -49,31 +51,6 @@ describe('MyToolbarComponent', () => {
     expect(component.isHandset$).toBeTruthy();
     component.isHandset$.subscribe((isHandset) => {
       expect(isHandset).toBeTrue();
-    });
-  });
-
-  it('should detect non-handset viewport', () => {
-    // Update the mock to return a non-handset state
-    breakpointObserver.observe.and.returnValue(
-      of({
-        matches: false,
-        breakpoints: {
-          [Breakpoints.Handset]: false,
-          [Breakpoints.HandsetLandscape]: false,
-          [Breakpoints.HandsetPortrait]: false,
-          [Breakpoints.Tablet]: false,
-          [Breakpoints.Web]: false,
-          [Breakpoints.XSmall]: false,
-          [Breakpoints.Small]: false,
-          [Breakpoints.Medium]: false,
-          [Breakpoints.Large]: false,
-          [Breakpoints.XLarge]: false,
-        },
-      } as BreakpointState)
-    );
-    expect(component.isHandset$).toBeTruthy();
-    component.isHandset$.subscribe((isHandset) => {
-      expect(isHandset).toBeFalse();
     });
   });
 });

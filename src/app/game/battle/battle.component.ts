@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BattleType, WinType } from '@core/services/game-engine.model';
 import { GameEngineService } from '@core/services/game-engine.service';
+
 import { PeopleProperties } from '@state/people';
 import { StarshipProperties } from '@state/starships';
 import { Observable } from 'rxjs';
@@ -21,8 +23,9 @@ export class BattleComponent implements OnInit {
     oponentTwo: StarshipProperties;
   }>;
 
-  public winner$: Observable<string>;
+  public winner$: Observable<WinType>;
   public queryParams = '';
+
   constructor(
     private route: ActivatedRoute,
     private gameEngine: GameEngineService
@@ -42,8 +45,10 @@ export class BattleComponent implements OnInit {
   }
 
   public selectRandomCharacterOrShip(name: string): void {
+    console.log(name);
+
     if (name !== null) return;
-    this.queryParams === 'people'
+    this.queryParams === BattleType.People
       ? this.gameEngine.getRandomPeopleOpponent()
       : this.gameEngine.getRandomStarshipOpponent();
   }

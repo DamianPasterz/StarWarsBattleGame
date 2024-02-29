@@ -111,7 +111,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { GameEngineService } from '@core/services/game-engine.service';
+import { GameEngineService } from '@core/services/GameEngineService';
 import { BattleComponent } from './battle.component';
 
 describe('BattleComponent', () => {

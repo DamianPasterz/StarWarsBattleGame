@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
 import { BattleOpponentsCardComponent } from './battle-opponents-card.component';
 
 describe('BattleOpponentsCardComponent', () => {
@@ -8,6 +9,7 @@ describe('BattleOpponentsCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BattleOpponentsCardComponent],
+      imports: [MatCardModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BattleOpponentsCardComponent);
