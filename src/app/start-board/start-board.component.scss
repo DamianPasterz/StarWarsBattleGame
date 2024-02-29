@@ -24,7 +24,7 @@
   position: relative;
   top: -100px;
   transform-origin: 50% 100%;
-  color: #000;
+  color: var(--black-1);
 }
 
 .fade {
@@ -32,7 +32,7 @@
   width: 90%;
   min-height: 60vh;
   top: -25px;
-  background-image: linear-gradient(0deg 75% transparent black);
+  background-image: linear-gradient(0deg 75% transparent var(--black-1));
 }
 
 @media screen and (max-width: 480px) {

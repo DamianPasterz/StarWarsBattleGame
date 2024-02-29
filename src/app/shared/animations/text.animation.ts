@@ -12,7 +12,7 @@ export const textAnimation = trigger('textAnimation', [
   state(
     'end',
     style({
-      color: '#000',
+      color: '#171212',
       top: '-6000px',
       transform: 'rotateX(25deg) translateZ(-2500px)',
     })
