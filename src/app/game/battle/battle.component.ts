@@ -45,8 +45,6 @@ export class BattleComponent implements OnInit {
   }
 
   public selectRandomCharacterOrShip(name: People | Starship): void {
-    console.log(name);
-
     if (name !== null) return;
     this.queryParams === BattleType.People
       ? this.gameEngine.getRandomPeopleOpponent()

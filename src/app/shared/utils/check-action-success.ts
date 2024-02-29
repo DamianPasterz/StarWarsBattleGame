@@ -12,8 +12,6 @@ export const checkActionSuccess = (
     ofType(success, failure),
     take(1),
     map((action) => {
-      console.log('checkActionSuccess', action);
-
       return action.type === success.type;
     })
   );
