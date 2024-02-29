@@ -1,4 +1,4 @@
-.gameContainer {
+.game-container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -6,10 +6,20 @@
   align-items: center;
 }
 
-.playContainer {
+.play-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 550px;
-  width: 400px;
+  height: 55rem;
+  width: 40rem;
+
+  &__win {
+    color: var(--green);
+    font-size: 3rem;
+  }
+
+  &__tie {
+    color: var(--yellow);
+    font-size: 3rem;
+  }
 }

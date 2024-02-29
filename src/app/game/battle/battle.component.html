@@ -1,5 +1,5 @@
 <div
-  class="gameContainer"
+  class="game-container"
   *ngIf="{
     peopleOponents: peopleOponents$ | async,
     starshipOponents: starshipOponents$ | async,
@@ -11,7 +11,7 @@
       [item]="viewData.peopleOponents?.oponentOne"
       (itemClicked)="selectRandomCharacterOrShip($event)"
     ></app-battle-opponents-card>
-    <div class="playContainer">
+    <div class="play-container">
       <div *ngIf="viewData.winner.resault === 'win'">
         <h3 style="color: chartreuse">WINER:</h3>
         <p style="color: beige">
@@ -40,14 +40,14 @@
         [item]="viewData.starshipOponents.oponentOne"
         (itemClicked)="selectRandomCharacterOrShip($event)"
       ></app-battle-opponents-card>
-      <div class="playContainer">
+      <div class="play-container">
         <div *ngIf="viewData.winner.resault === 'win'">
-          <h3 style="color: chartreuse">WINER:</h3>
+          <h3 class="play-container__win">WINER:</h3>
           <p style="color: beige">
             {{ viewData.winner.opponent }}
           </p>
         </div>
-        <h3 *ngIf="viewData.winner.resault === 'tie'" style="color: rgb(238, 241, 35)">TIE</h3>
+        <h3 class="play-container__tie" *ngIf="viewData.winner.resault === 'tie'">TIE</h3>
         <button
           class="SW-button"
           *ngIf="viewData.starshipOponents?.oponentOne && viewData.starshipOponents?.oponentTwo"

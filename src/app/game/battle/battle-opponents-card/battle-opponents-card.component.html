@@ -17,10 +17,12 @@
 
     <ng-template #starshipTemplate>
       <ng-container *ngIf="item">
-        <h2>•NAME• {{ item?.name }}</h2>
+        <h2>•NAME•</h2>
         <h1>{{ item?.name }}</h1>
         <h2>•CREW•</h2>
         <p>{{ item.crew }}</p>
+        <h2>•MANUFACTURER•</h2>
+        <p>{{ item.manufacturer }}</p>
       </ng-container>
     </ng-template>
   </ng-template>

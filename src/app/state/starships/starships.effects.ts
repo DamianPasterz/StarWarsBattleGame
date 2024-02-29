@@ -12,56 +12,6 @@ export class StarshipsEffects {
     private httpService: HttpService
   ) {}
 
-  // getStarShipsAndProperties$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(actions.getListOfstarships.request),
-  //     switchMap(() =>
-  //       this.httpService.getStarShipsResource().pipe(
-  //         switchMap((listOfStarship) =>
-  //           from(listOfStarship.results).pipe(
-  //             mergeMap((starShip) =>
-  //               this.httpService.getStarshipByID(starShip.uid).pipe(
-  //                 map(({ result }) =>
-  //                   actions.getSingleStarshipsPropertis.success({
-  //                     starship: result.properties,
-  //                   })
-  //                 ),
-  //                 catchError((error) => of(actions.getSingleStarshipsPropertis.failure({ error })))
-  //               )
-  //             )
-  //           )
-  //         ),
-  //         catchError((error) => of(actions.getListOfstarships.failure({ error })))
-  //       )
-  //     )
-  //   );
-  // });
-
-  // Pobieranie listy statków kosmicznych
-
-  // getStarshipsAndProperties$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(actions.getListOfstarships.request),
-  //     switchMap(() =>
-  //       this.httpService.getStarShipsResource().pipe(
-  //         switchMap(({ results }) =>
-  //           from(results).pipe(
-  //             mergeMap((starship) =>
-  //               this.httpService.getStarshipByID(starship.uid).pipe(
-  //                 map(({ result }) =>
-  //                   actions.getSingleStarshipsPropertis.success({ starship: result.properties })
-  //                 ),
-  //                 catchError((error) => of(actions.getSingleStarshipsPropertis.failure({ error })))
-  //               )
-  //             )
-  //           )
-  //         ),
-  //         catchError((error) => of(actions.getListOfstarships.failure({ error })))
-  //       )
-  //     )
-  //   );
-  // });
-
   getStarshipsAndProperties$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(actions.getListOfstarships.request),

@@ -22,31 +22,3 @@ export interface BattleStats {
   loss: number;
   tie: number;
 }
-
-// export interface PeopleResult {
-//   properties: PeopleProperties;
-//   description: string;
-//   _id: string;
-//   uid: string;
-//   __v: number;
-// }
-
-// export interface PeopleResponse {
-//   message: string;
-//   result: PeopleResult;
-// }
-
-// export interface StarWarsCharacterResponse {
-//   message: string;
-//   total_records: number;
-//   total_pages: number;
-//   previous: string | null;
-//   next: string | null;
-//   results: StarWarsCharacter[];
-// }
-
-// export interface StarWarsCharacter {
-//   uid: string;
-//   name: string;
-//   url: string;
-// }
