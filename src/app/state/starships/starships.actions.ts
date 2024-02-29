@@ -1,7 +1,7 @@
 import { createAction, createActionGroup, props } from '@ngrx/store';
 import { BattleStats } from '@state/people';
 import { baseEvents } from '../utils/action-groups';
-import { StarshipProperties } from './starships.model';
+import { Starship } from './starships.model';
 
 export const getListOfstarships = createActionGroup({
   source: '[Globals] Get Starships',
@@ -15,7 +15,7 @@ export const getSingleStarshipsPropertis = createActionGroup({
   events: {
     ...baseEvents,
     Request: props<{ id: string }>(),
-    Success: props<{ starship: (StarshipProperties | null)[] }>(),
+    Success: props<{ starship: Starship[] }>(),
   },
 });
 

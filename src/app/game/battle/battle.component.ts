@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { BattleType, WinType } from '@core/services/game-engine.model';
 import { GameEngineService } from '@core/services/game-engine.service';
 
-import { PeopleProperties } from '@state/people';
-import { StarshipProperties } from '@state/starships';
+import { People } from '@state/people';
+import { Starship } from '@state/starships';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,12 +15,12 @@ import { Observable } from 'rxjs';
 })
 export class BattleComponent implements OnInit {
   public peopleOponents$: Observable<{
-    oponentOne: PeopleProperties;
-    oponentTwo: PeopleProperties;
+    oponentOne: People;
+    oponentTwo: People;
   }>;
   public starshipOponents$: Observable<{
-    oponentOne: StarshipProperties;
-    oponentTwo: StarshipProperties;
+    oponentOne: Starship;
+    oponentTwo: Starship;
   }>;
 
   public winner$: Observable<WinType>;
@@ -44,7 +44,7 @@ export class BattleComponent implements OnInit {
     this.gameEngine.initialGame(this.queryParams);
   }
 
-  public selectRandomCharacterOrShip(name: string): void {
+  public selectRandomCharacterOrShip(name: People | Starship): void {
     console.log(name);
 
     if (name !== null) return;

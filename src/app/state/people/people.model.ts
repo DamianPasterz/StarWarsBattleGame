@@ -1,5 +1,5 @@
 export interface PeopleState {
-  people: PeopleProperties[];
+  people: People[];
   stats: BattleStats[];
 }
 
@@ -8,7 +8,7 @@ export const initialState: PeopleState = {
   stats: [],
 };
 
-export interface PeopleProperties {
+export interface People {
   mass: number;
   name: string;
   homeworld: string;
@@ -23,30 +23,30 @@ export interface BattleStats {
   tie: number;
 }
 
-export interface PeopleResult {
-  properties: PeopleProperties;
-  description: string;
-  _id: string;
-  uid: string;
-  __v: number;
-}
+// export interface PeopleResult {
+//   properties: PeopleProperties;
+//   description: string;
+//   _id: string;
+//   uid: string;
+//   __v: number;
+// }
 
-export interface PeopleResponse {
-  message: string;
-  result: PeopleResult;
-}
+// export interface PeopleResponse {
+//   message: string;
+//   result: PeopleResult;
+// }
 
-export interface StarWarsCharacterResponse {
-  message: string;
-  total_records: number;
-  total_pages: number;
-  previous: string | null;
-  next: string | null;
-  results: StarWarsCharacter[];
-}
+// export interface StarWarsCharacterResponse {
+//   message: string;
+//   total_records: number;
+//   total_pages: number;
+//   previous: string | null;
+//   next: string | null;
+//   results: StarWarsCharacter[];
+// }
 
-export interface StarWarsCharacter {
-  uid: string;
-  name: string;
-  url: string;
-}
+// export interface StarWarsCharacter {
+//   uid: string;
+//   name: string;
+//   url: string;
+// }

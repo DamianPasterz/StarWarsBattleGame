@@ -1,5 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { People } from '@state/people/people.model';
+import { Starship } from '@state/starships/starships.model';
 
 @Component({
   selector: 'app-battle-opponents-card',
@@ -10,10 +12,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   ],
 })
 export class BattleOpponentsCardComponent {
-  @Input() item: any;
-  @Output() itemClicked = new EventEmitter<string>();
+  @Input() item: People | Starship;
+  @Output() itemClicked = new EventEmitter<People | Starship>();
 
-  selectRandomCharacterOrShip(name: string) {
-    this.itemClicked.emit(name);
+  public isPeople: boolean;
+
+  selectRandomCharacterOrShip(item: People | Starship) {
+    this.itemClicked.emit(item);
+  }
+
+  isPeopleProperties(item: People | Starship): item is People {
+    return (item as People)?.mass !== undefined;
   }
 }

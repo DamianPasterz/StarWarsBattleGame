@@ -2,7 +2,7 @@
 
 ## Project Description
 
-"Star Wars Card Battle Game" is an interactive web application that allows users to engage in a fun and unique card game based on the Star Wars universe. The game utilizes the Star Wars API (SWAPI) to fetch random characters or starships and compares their attributes to determine a winner. The goal is to have fun while testing your skills in Angular, TypeScript, and web development practices.
+"Star Wars Card Battle Game" is an interactive web application that allows users to engage in a fun and unique card game based on the Star Wars universe. The game utilizes the Star Wars API (SWAPI) to fetch random characters or starships and compares their attributes to determine a winner.
 
 ## Technologies Used
 

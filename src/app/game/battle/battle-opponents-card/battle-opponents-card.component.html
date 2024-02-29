@@ -1,4 +1,27 @@
-<mat-card class="SW-card" (click)="selectRandomCharacterOrShip(item?.name)" @fadeIn>
-  <h1>{{ item?.name }}</h1>
-  <h1>{{ item?.mass || item?.crew }}</h1>
+<mat-card class="SW-card" (click)="selectRandomCharacterOrShip(item)" @fadeIn>
+  <ng-container *ngIf="!item; else isItem">
+    <mat-card-header class="SW-full-center-flex-column">
+      <p>choose</p>
+
+      <p>opponent</p>
+    </mat-card-header>
+  </ng-container>
+
+  <ng-template #isItem>
+    <ng-container *ngIf="isPeopleProperties(item); else starshipTemplate">
+      <h2>•NAME•</h2>
+      <h1>{{ item?.name }}</h1>
+      <h2>•MASS•</h2>
+      <p>{{ item?.mass }}</p>
+    </ng-container>
+
+    <ng-template #starshipTemplate>
+      <ng-container *ngIf="item">
+        <h2>•NAME• {{ item?.name }}</h2>
+        <h1>{{ item?.name }}</h1>
+        <h2>•CREW•</h2>
+        <p>{{ item.crew }}</p>
+      </ng-container>
+    </ng-template>
+  </ng-template>
 </mat-card>

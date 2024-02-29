@@ -1,6 +1,6 @@
 import { createAction, createActionGroup, props } from '@ngrx/store';
 import { baseEvents } from '../utils/action-groups';
-import { BattleStats, PeopleProperties } from './people.model';
+import { BattleStats, People } from './people.model';
 
 export const getListOfPeople = createActionGroup({
   source: '[People] Get People',
@@ -14,11 +14,8 @@ export const getSinglePeoplePropertis = createActionGroup({
   events: {
     ...baseEvents,
     Request: props<{ id: string }>(),
-    Success: props<{ people: PeopleProperties[] }>(),
+    Success: props<{ people: People[] }>(),
   },
 });
 
-export const updateBattleStatsAction = createAction(
-  '[People] Update Battle Stats',
-  props<{ stats: BattleStats }>()
-);
+export const updateBattleStatsAction = createAction('[People] Update Battle Stats', props<{ stats: BattleStats }>());

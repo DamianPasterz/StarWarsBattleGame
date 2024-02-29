@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BattleStats, PeopleFacade, PeopleProperties } from '@state/people';
-import { StarshipProperties, StarshipsFacade } from '@state/starships';
+import { BattleStats, People, PeopleFacade } from '@state/people';
+import { Starship, StarshipsFacade } from '@state/starships';
 import { BehaviorSubject, Observable, of, switchMap, take } from 'rxjs';
 import { BattleType, GameOutcome, WinType } from './game-engine.model';
 
@@ -11,21 +11,21 @@ export class GameEngineService {
   private battleType: string = '';
 
   private peopleOponents$ = new BehaviorSubject<{
-    oponentOne: PeopleProperties | null;
-    oponentTwo: PeopleProperties | null;
+    oponentOne: People | null;
+    oponentTwo: People | null;
   }>({ oponentOne: null, oponentTwo: null });
   public peopleOponentsObservable$: Observable<{
-    oponentOne: PeopleProperties | null;
-    oponentTwo: PeopleProperties | null;
+    oponentOne: People | null;
+    oponentTwo: People | null;
   }> = this.peopleOponents$.asObservable();
 
   private starshipOponents$ = new BehaviorSubject<{
-    oponentOne: StarshipProperties | null;
-    oponentTwo: StarshipProperties | null;
+    oponentOne: Starship | null;
+    oponentTwo: Starship | null;
   }>({ oponentOne: null, oponentTwo: null });
   public starshipOponentsObservable$: Observable<{
-    oponentOne: StarshipProperties | null;
-    oponentTwo: StarshipProperties | null;
+    oponentOne: Starship | null;
+    oponentTwo: Starship | null;
   }> = this.starshipOponents$.asObservable();
 
   public winnerName$ = new BehaviorSubject<WinType>({ opponent: '', resault: null });
@@ -63,11 +63,7 @@ export class GameEngineService {
     }
   }
 
-  public updateOrAddStats(
-    entity: PeopleProperties | StarshipProperties,
-    entityType: BattleType,
-    outcome: GameOutcome
-  ): void {
+  public updateOrAddStats(entity: People | Starship, entityType: BattleType, outcome: GameOutcome): void {
     let facade: PeopleFacade | StarshipsFacade;
     if (entityType === BattleType.People) {
       facade = this.peopleFacade;
@@ -108,7 +104,7 @@ export class GameEngineService {
 
   public getRandomPeopleOpponent(): void {
     this.getRandomOpponentIndex(this.peopleFacade).subscribe((index) => {
-      this.getRandomOpponent<PeopleProperties>(this.peopleFacade, index).subscribe((person) => {
+      this.getRandomOpponent<People>(this.peopleFacade, index).subscribe((person) => {
         const currentOpponents = this.peopleOponents$.getValue();
         if (currentOpponents.oponentOne === null) {
           this.peopleOponents$.next({ ...currentOpponents, oponentOne: person });
@@ -122,7 +118,7 @@ export class GameEngineService {
 
   public getRandomStarshipOpponent(): void {
     this.getRandomOpponentIndex(this.starshipFacade).subscribe((index) => {
-      this.getRandomOpponent<StarshipProperties>(this.starshipFacade, index).subscribe((starship) => {
+      this.getRandomOpponent<Starship>(this.starshipFacade, index).subscribe((starship) => {
         const currentOpponents = this.starshipOponents$.getValue();
         if (currentOpponents.oponentOne === null) {
           this.starshipOponents$.next({ ...currentOpponents, oponentOne: starship });
