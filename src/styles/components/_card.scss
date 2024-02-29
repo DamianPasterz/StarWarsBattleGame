@@ -1,0 +1,32 @@
+.SW-card {
+  width: 30rem;
+  height: 55rem;
+  background-color: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  border: 0.2rem solid var(--brown-dark-1) !important;
+  border-radius: 1rem;
+
+  cursor: pointer;
+  &:hover {
+    border: 5px solid var(--brown-ligth-1) !important;
+  }
+  & > h1 {
+    color: var(--brown-ligth-1) !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .SW-card {
+    width: 30vw;
+    height: 30vh;
+  }
+}
+@media screen and (max-width: 480px) {
+  .SW-card {
+    width: 80vw;
+    height: 30vh;
+  }
+}

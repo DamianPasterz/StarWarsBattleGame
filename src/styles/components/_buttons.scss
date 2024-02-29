@@ -1,0 +1,59 @@
+.SW-button {
+  position: relative;
+  height: 50px;
+  padding: 0 30px;
+  border: 2px solid var(--white-1);
+  background: var(--black-1);
+  user-select: none;
+  white-space: nowrap;
+  transition: all 0.05s linear;
+  font-family: inherit;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: var(--black-1);
+    transition: all 0.2s linear;
+  }
+
+  &::before {
+    width: calc(100% + 6px);
+    height: calc(100% - 16px);
+    top: 8px;
+    left: -3px;
+  }
+
+  &::after {
+    width: calc(100% - 16px);
+    height: calc(100% + 6px);
+    top: -3px;
+    left: 8px;
+  }
+
+  &:hover {
+    cursor: crosshair;
+
+    &::before {
+      height: calc(100% - 32px);
+      top: 1.6rem;
+    }
+
+    &::after {
+      width: calc(100% - 32px);
+      left: 1.6rem;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  span {
+    font-size: 1.5rem;
+    z-index: 3;
+    position: relative;
+    font-weight: 600;
+    color: var(--white-1);
+  }
+}

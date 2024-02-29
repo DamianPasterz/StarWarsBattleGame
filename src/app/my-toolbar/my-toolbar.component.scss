@@ -1,0 +1,23 @@
+.toolbar {
+  width: 100%;
+  background-color: transparent !important;
+  border-radius: 0.5rem;
+  padding-left: 10rem;
+  margin-top: 10rem;
+  &__spacer {
+    flex: 1 1 auto;
+  }
+  &__button {
+    margin-right: 1rem;
+  }
+}
+
+.menu-button {
+  background-color: var(--black-1);
+  color: var(--white-2);
+  cursor: pointer;
+  &:hover &:focus {
+    color: var(--white-1);
+    background-color: var(--brown-dark-1);
+  }
+}

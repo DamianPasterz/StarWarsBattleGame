@@ -1,0 +1,17 @@
+<div class="SW-full-center-flex-column">
+  <mat-card class="SW-line title-container">select game type </mat-card>
+  <div class="gameContanier">
+    <div class="SW-cardContainer">
+      <app-battle-type-card
+        [title]="'Starship'"
+        [routerLink]="['/game/battle']"
+        [queryParams]="{ battle: 'starship' }"
+      ></app-battle-type-card>
+      <app-battle-type-card
+        [title]="'People'"
+        [routerLink]="['/game/battle']"
+        [queryParams]="{ battle: 'people' }"
+      ></app-battle-type-card>
+    </div>
+  </div>
+</div>

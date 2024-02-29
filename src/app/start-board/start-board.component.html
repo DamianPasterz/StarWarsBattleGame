@@ -1,0 +1,33 @@
+<div class="body">
+  <router-outlet></router-outlet>
+  <ng-container *ngIf="!showButton; else button">
+    <div class="fade"></div>
+    <div class="star-wars">
+      <div class="text" (@textAnimation.done)="animationDone($event)" [@textAnimation]="textAnimationState">
+        <div>
+          <p>Episode IVX</p>
+          <p>Code & Pepper</p>
+        </div>
+        <p>I am Damian, a traveler through the digital space in search of challenges and opportunities.</p>
+        <p>
+          My passion for programming has been with me for years, and now I am venturing into a new galaxy of
+          possibilities as a candidate for the position of Angular Developer.
+        </p>
+        <p>
+          Like the heroes of Star Wars, we are ready for the challenges that await us in this galaxy of web
+          applications. With Jedi determination, I aim to bring not only programming skills but also dedication,
+          creativity, and the ability to adapt quickly to changing conditions.
+        </p>
+        <p>
+          I feel the Force of Angular within me and am ready to collaborate with the team to create applications that
+          not only meet expectations but also push the boundaries of what is possible. Give me the opportunity to join
+          your team so that together we can create something truly unforgettable in this galaxy of code.
+        </p>
+        <p>May the Force of Angular be with us!</p>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #button>
+    <button class="SW-button" [routerLink]="['/game/selectMode']"><span> GAME ON </span></button>
+  </ng-template>
+</div>

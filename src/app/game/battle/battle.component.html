@@ -1,0 +1,62 @@
+<div
+  class="gameContainer"
+  *ngIf="{
+    peopleOponents: peopleOponents$ | async,
+    starshipOponents: starshipOponents$ | async,
+    winner: winner$ | async
+  } as viewData"
+>
+  <div class="SW-cardContainer" *ngIf="queryParams === 'people'; else starshipOpponents">
+    <app-battle-opponents-card
+      [item]="viewData.peopleOponents?.oponentOne"
+      (itemClicked)="selectRandomCharacterOrShip($event)"
+    ></app-battle-opponents-card>
+    <div class="playContainer">
+      <div *ngIf="viewData.winner.length > 0">
+        <h3 style="color: chartreuse">WINER:</h3>
+        <p style="color: beige">
+          {{ viewData.winner }}
+        </p>
+      </div>
+      <button
+        class="SW-button"
+        *ngIf="viewData.starshipOponents?.oponentOne && viewData.starshipOponents?.oponentTwo"
+        (click)="fight()"
+      >
+        <span>Fight</span>
+      </button>
+    </div>
+    <app-battle-opponents-card
+      [item]="viewData.peopleOponents?.oponentTwo"
+      (itemClicked)="selectRandomCharacterOrShip($event)"
+    ></app-battle-opponents-card>
+  </div>
+
+  <ng-template #starshipOpponents>
+    <div class="SW-cardContainer">
+      <app-battle-opponents-card
+        [item]="viewData.starshipOponents.oponentOne"
+        (itemClicked)="selectRandomCharacterOrShip($event)"
+      ></app-battle-opponents-card>
+      <div class="playContainer">
+        <div *ngIf="viewData.winner.length > 0">
+          <h3 style="color: chartreuse">WINER:</h3>
+          <p style="color: beige">
+            {{ viewData.winner }}
+          </p>
+        </div>
+        <button
+          class="SW-button"
+          *ngIf="viewData.starshipOponents?.oponentOne && viewData.starshipOponents?.oponentTwo"
+          (click)="fight()"
+        >
+          <span>Fight</span>
+        </button>
+      </div>
+      <app-battle-opponents-card
+        [item]="viewData.starshipOponents.oponentTwo"
+        (itemClicked)="selectRandomCharacterOrShip($event)"
+      ></app-battle-opponents-card>
+    </div>
+  </ng-template>
+</div>

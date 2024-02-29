@@ -1,0 +1,14 @@
+@use 'abstracts/_abstracts-dir';
+@use 'base/_base-dir';
+@use 'components/_components-dir';
+
+.mat-mdc-card {
+  background-color: transparent !important;
+}
+
+.mat-mdc-menu-content,
+.mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
+  background-color: var(--black-1);
+  padding: 0 !important;
+  padding: 1rem !important;
+}

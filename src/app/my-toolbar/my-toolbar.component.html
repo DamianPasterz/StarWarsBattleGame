@@ -1,0 +1,35 @@
+<mat-toolbar color="primary" class="mat-elevation-z8 toolbar SW-line">
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    *ngIf="isHandset$ | async"
+  >
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+
+  <span>starWars game</span>
+  <span class="toolbar__spacer"></span>
+  <button *ngIf="(isHandset$ | async) === false" class="SW-button toolbar__button" [routerLink]="['/']">
+    <span>home</span>
+  </button>
+  <button *ngIf="(isHandset$ | async) === false" class="SW-button toolbar__button" [routerLink]="['/game/selectMode']">
+    <span>Battle Type</span>
+  </button>
+  <button *ngIf="(isHandset$ | async) === false" class="SW-button toolbar__button" [routerLink]="['/']">
+    <span>stats</span>
+  </button>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item class="menu-button" [routerLink]="['/']">
+    <span>home</span>
+  </button>
+  <button mat-menu-item class="menu-button" [routerLink]="['/game/selectMode']">
+    <span>Battle Type</span>
+  </button>
+  <button mat-menu-item class="menu-button" [routerLink]="['/']">
+    <span>stats</span>
+  </button>
+</mat-menu>
