@@ -3,7 +3,7 @@ import { CanActivateFn } from '@angular/router';
 import { Actions } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { checkActionSuccess } from '@shared/utils/check-action-success';
-import { AppState } from '@state/index'; // Import your AppState interface
+import { AppState } from '@state/index';
 import { StarshipsFacade, getSingleStarshipsPropertis } from '@state/starships';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';

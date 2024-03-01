@@ -34,7 +34,7 @@ import { effects, facades, reducer } from './state';
       },
     }),
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
+      maxAge: 25,
     }),
     LoadingComponent,
   ],

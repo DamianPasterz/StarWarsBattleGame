@@ -9,10 +9,9 @@ describe('HttpService', () => {
   beforeEach(() => {
     const mockAppConfig: AppConfig = {
       API_URL: 'http://mock-api-url.com',
-      // ... other properties of AppConfig if needed
     };
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // Add HttpClientTestingModule to the imports array
+      imports: [HttpClientTestingModule],
       providers: [HttpService, { provide: APP_CONFIG, useValue: mockAppConfig }],
     });
     service = TestBed.inject(HttpService);

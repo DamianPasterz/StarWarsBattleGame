@@ -12,9 +12,7 @@ describe('MyToolbarComponent', () => {
   let breakpointObserver: jasmine.SpyObj<BreakpointObserver>;
 
   beforeEach(async () => {
-    // Mock BreakpointObserver
     breakpointObserver = jasmine.createSpyObj('BreakpointObserver', ['observe']);
-    // Correctly mock the observe method to return an Observable<BreakpointState>
     breakpointObserver.observe.and.returnValue(
       of({
         matches: true,
