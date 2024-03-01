@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { PeopleFacade } from '@state/people';
 import { StarshipsFacade } from '@state/starships';
 import { of } from 'rxjs';
-import { GameEngineService } from './GameEngineService';
+import { GameEngineService } from './game-engine.service';
 
 describe('GameEngineService', () => {
   let service: GameEngineService;
