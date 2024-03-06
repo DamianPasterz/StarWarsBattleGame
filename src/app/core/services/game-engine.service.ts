@@ -29,13 +29,17 @@ export class GameEngineService {
   }> = this.starshipOponents$.asObservable();
 
   public winnerName$ = new BehaviorSubject<WinType>({ opponent: '', resault: null });
-
   public winnerNameObservable$: Observable<WinType> = this.winnerName$.asObservable();
+
+  public stats$: BattleStats[];
+  // public statsObservable$: Observable<BattleStats[]> = this.stats$.asObservable();
 
   constructor(
     private starshipFacade: StarshipsFacade,
     private peopleFacade: PeopleFacade
-  ) {}
+  ) {
+    this.peopleFacade.allStats$.subscribe((stast) => (this.stats$ = stast));
+  }
 
   public initialGame(params: string): void {
     this.battleType = params;
@@ -82,7 +86,7 @@ export class GameEngineService {
           facade.setStats(updatedStats);
         });
     } else {
-      console.error('Unknown entity type');
+      throw new Error('Unknown entity type');
     }
     if (outcome === GameOutcome.Win) {
       this.winnerName$.next({ opponent: entity.name, resault: GameOutcome.Win });
@@ -180,5 +184,12 @@ export class GameEngineService {
         this.starshipOponents$.next({ oponentOne: null, oponentTwo: null });
       }
     });
+  }
+
+  public getStats(id: string): Observable<BattleStats> {
+    if (id === undefined) return of();
+    else {
+      return this.peopleFacade.selectStatsById(id);
+    }
   }
 }

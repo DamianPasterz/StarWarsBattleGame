@@ -9,6 +9,7 @@
   <div class="SW-cardContainer" *ngIf="queryParams === 'people'; else starshipOpponents">
     <app-battle-opponents-card
       [item]="viewData.peopleOponents?.oponentOne"
+      (idClicked)="handleIdClicked($event)"
       (itemClicked)="selectRandomCharacterOrShip($event)"
     ></app-battle-opponents-card>
     <div class="play-container">
@@ -30,6 +31,7 @@
     </div>
     <app-battle-opponents-card
       [item]="viewData.peopleOponents?.oponentTwo"
+      (idClicked)="handleIdClicked($event)"
       (itemClicked)="selectRandomCharacterOrShip($event)"
     ></app-battle-opponents-card>
   </div>
@@ -38,6 +40,7 @@
     <div class="SW-cardContainer">
       <app-battle-opponents-card
         [item]="viewData.starshipOponents.oponentOne"
+        (idClicked)="handleIdClicked($event)"
         (itemClicked)="selectRandomCharacterOrShip($event)"
       ></app-battle-opponents-card>
       <div class="play-container">
@@ -58,6 +61,7 @@
       </div>
       <app-battle-opponents-card
         [item]="viewData.starshipOponents.oponentTwo"
+        (idClicked)="handleIdClicked($event)"
         (itemClicked)="selectRandomCharacterOrShip($event)"
       ></app-battle-opponents-card>
     </div>

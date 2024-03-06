@@ -17,7 +17,7 @@
   <button *ngIf="(isHandset$ | async) === false" class="SW-button toolbar__button" [routerLink]="['/game/selectMode']">
     <span>Battle Type</span>
   </button>
-  <button *ngIf="(isHandset$ | async) === false" class="SW-button toolbar__button" [routerLink]="['/']">
+  <button *ngIf="(isHandset$ | async) === false" class="SW-button toolbar__button" [routerLink]="['/game/statistics']">
     <span>stats</span>
   </button>
 </mat-toolbar>
@@ -29,7 +29,7 @@
   <button mat-menu-item class="menu-button" [routerLink]="['/game/selectMode']">
     <span>Battle Type</span>
   </button>
-  <button mat-menu-item class="menu-button" [routerLink]="['/']">
+  <button mat-menu-item class="menu-button" [routerLink]="['/game/statistics']">
     <span>stats</span>
   </button>
 </mat-menu>

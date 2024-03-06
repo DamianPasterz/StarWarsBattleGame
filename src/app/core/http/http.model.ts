@@ -30,10 +30,17 @@ export interface StarshipResult extends BaseResault {
 export interface PeopleResult extends BaseResault {
   properties: PeopleProperties;
 }
+export interface PlanetsResult extends BaseResault {
+  properties: PlanetProperties;
+}
 
 export interface StarshipResponse {
   message: string;
   result: StarshipResult;
+}
+export interface PlanetResponse {
+  message: string;
+  result: PlanetsResult;
 }
 
 export interface StarshipProperties {
@@ -74,6 +81,21 @@ export interface PeopleProperties {
   starships: string[];
   url: string;
   vehicles: string[];
+}
+
+export interface PlanetProperties {
+  diameter: string;
+  rotation_period: string;
+  orbital_period: string;
+  gravity: string;
+  population: string;
+  climate: string;
+  terrain: string;
+  surface_water: string;
+  created: string;
+  edited: string;
+  name: string;
+  url: string;
 }
 
 export interface PeopleResponse {

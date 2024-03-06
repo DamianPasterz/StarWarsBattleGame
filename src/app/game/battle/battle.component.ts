@@ -45,6 +45,7 @@ export class BattleComponent implements OnInit {
   }
 
   public selectRandomCharacterOrShip(name: People | Starship): void {
+    // this.gameEngine.getStats(name?.id);
     if (name !== null) return;
     this.queryParams === BattleType.People
       ? this.gameEngine.getRandomPeopleOpponent()
@@ -53,5 +54,10 @@ export class BattleComponent implements OnInit {
 
   public fight(): void {
     this.gameEngine.fight();
+  }
+
+  public handleIdClicked(itemId: string): void {
+    this.gameEngine.getStats(itemId);
+    console.log('Item ID clicked:', itemId);
   }
 }

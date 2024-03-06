@@ -9,6 +9,7 @@ import { BattleStats } from './people.model';
 })
 export class PeopleFacade {
   public people$ = this.store.select(selectors.selectPeople);
+  public allStats$ = this.store.select(selectors.selectPeopleStats);
   public count$ = this.store.select(selectors.selectPeopleCount);
   public selectByIndex = (index: number) => this.store.select(selectors.selectPeopleByIndex(index));
 

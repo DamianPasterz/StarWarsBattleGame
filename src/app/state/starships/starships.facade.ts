@@ -11,6 +11,7 @@ import * as actions from './starships.actions';
 export class StarshipsFacade {
   public starship$ = this.store.select(selectors.selectStarship);
   public count$ = this.store.select(selectors.selectStarshipCount);
+  public allStats$ = this.store.select(selectors.selectStarshipeStats);
   public selectByIndex = (index: number) => this.store.select(selectors.selectStarshipByIndex(index));
 
   public selectStatsById = (id: string) => this.store.select(selectors.selectStarshipStatsById(id));

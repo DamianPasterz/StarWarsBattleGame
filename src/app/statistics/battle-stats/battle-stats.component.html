@@ -1,0 +1,41 @@
+<div class="container">
+  <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="end">
+    <mat-tab label="People">
+      <ng-container *ngIf="(peopleStats$ | async).length > 1; else noStats">
+        <div class="stats">
+          <div class="stats__dounat" *ngFor="let stast of peopleStats$ | async">
+            <div class="stats__dounat__title">{{ stast.name }}</div>
+            <app-battle-stats-chart [stats]="stast"></app-battle-stats-chart>
+          </div>
+        </div>
+      </ng-container>
+    </mat-tab>
+    <mat-tab label="Starship">
+      <ng-container *ngIf="(starshipStats$ | async).length > 1; else noStats">
+        <div class="stats">
+          <div class="stats__dounat" *ngFor="let stast of starshipStats$ | async">
+            <h1>{{ stast.name }}</h1>
+            <app-battle-stats-chart [stats]="stast"></app-battle-stats-chart>
+          </div>
+        </div> </ng-container
+    ></mat-tab>
+    <mat-tab label="Planet">
+      <ng-container *ngIf="(planetsList$ | async).length > 1; else noStats">
+        <div class="stats">
+          <div class="stats__dounat" *ngFor="let planet of planetsList$ | async">
+            <h1>{{ planet.name }}</h1>
+            <div *ngFor="let resident of planet.residents">
+              <h1>-{{ resident.name }}</h1>
+            </div>
+          </div>
+        </div>
+      </ng-container></mat-tab
+    >
+  </mat-tab-group>
+</div>
+
+<ng-template #noStats>
+  <div class="stats__noStats">
+    <p>No stats</p>
+  </div>
+</ng-template>

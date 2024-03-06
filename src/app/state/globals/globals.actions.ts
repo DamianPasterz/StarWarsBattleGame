@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import * as peopleActions from '@state/people/people.actions';
+import * as planetsActions from '@state/planets/planets.actions';
 import * as starshipActions from '@state/starships/starships.actions';
 
 export const showLoading = createAction('[Globals] loading', props<{ loading: boolean }>());
@@ -9,6 +10,8 @@ export const actionsLoadingOn = [
   starshipActions.getSingleStarshipsPropertis.request,
   peopleActions.getListOfPeople.request,
   peopleActions.getSinglePeoplePropertis.request,
+  planetsActions.getListOfPlanets.request,
+  planetsActions.getSinglePlanetPropertis.request,
 ];
 
 export const actionsLoadingOff = [
@@ -20,4 +23,8 @@ export const actionsLoadingOff = [
   peopleActions.getListOfPeople.failure,
   peopleActions.getSinglePeoplePropertis.success,
   peopleActions.getSinglePeoplePropertis.failure,
+  planetsActions.getListOfPlanets.success,
+  planetsActions.getListOfPlanets.failure,
+  planetsActions.getSinglePlanetPropertis.success,
+  planetsActions.getSinglePlanetPropertis.failure,
 ];
