@@ -11,13 +11,14 @@ import * as actions from './starships.actions';
 export class StarshipsFacade {
   public starship$ = this.store.select(selectors.selectStarship);
   public count$ = this.store.select(selectors.selectStarshipCount);
+  public allStats$ = this.store.select(selectors.selectStarshipeStats);
   public selectByIndex = (index: number) => this.store.select(selectors.selectStarshipByIndex(index));
 
   public selectStatsById = (id: string) => this.store.select(selectors.selectStarshipStatsById(id));
   constructor(private store: Store<AppState>) {}
 
   public getStarships(): void {
-    this.store.dispatch(actions.getListOfstarships.request());
+    this.store.dispatch(actions.getListOfStarships.request());
   }
 
   public setStats(stats: BattleStats): void {

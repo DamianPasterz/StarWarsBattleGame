@@ -13,15 +13,12 @@ body {
   margin: 0 !important;
   font-family: Manrope;
   overflow: hidden;
+  color: var(--black-1);
+  background-color: var(--black-1);
 }
 
 html {
   font-size: 10px;
-}
-
-body {
-  background-color: var(--black-1);
-  color: var(--white-2);
 }
 
 .mapboxgl-canvas {
@@ -34,4 +31,8 @@ body {
 
 .SW-line {
   border: 2px solid var(--brown-dark-1);
+}
+
+p {
+  color: var(--black-1);
 }

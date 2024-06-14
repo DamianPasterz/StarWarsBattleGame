@@ -1,28 +1,32 @@
-<mat-card class="SW-card" (click)="selectRandomCharacterOrShip(item)" @fadeIn>
+<div class="SW-card" (click)="selectRandomCharacterOrShip(item)" @fadeIn>
   <ng-container *ngIf="!item; else isItem">
-    <mat-card-header class="SW-full-center-flex-column">
+    <div class="choose-opponents">
       <p>CHOOSE</p>
       <p>OPPONENTS</p>
-    </mat-card-header>
+    </div>
   </ng-container>
 
   <ng-template #isItem>
     <ng-container *ngIf="isPeopleProperties(item); else starshipTemplate">
-      <h2>•NAME•</h2>
-      <h1>{{ item?.name }}</h1>
-      <h2>•MASS•</h2>
-      <p>{{ item?.mass }}</p>
+      <div class="opponents">
+        <h2 class="opponents__title">•NAME•</h2>
+        <h1 class="opponents__name">{{ item?.name }}</h1>
+        <h2 class="opponents__title">•MASS•</h2>
+        <p class="opponents__score">{{ item?.mass }}</p>
+      </div>
     </ng-container>
 
     <ng-template #starshipTemplate>
       <ng-container *ngIf="item">
-        <h2>•NAME•</h2>
-        <h1>{{ item?.name }}</h1>
-        <h2>•CREW•</h2>
-        <p>{{ item.crew }}</p>
-        <h2>•MANUFACTURER•</h2>
-        <p>{{ item.manufacturer }}</p>
+        <div class="opponents">
+          <h2 class="opponents__title">•NAME•</h2>
+          <h1 class="opponents__name">{{ item?.name }}</h1>
+          <h2 class="opponents__title">•CREW•</h2>
+          <p class="opponents__score">{{ item.crew }}</p>
+          <h2 class="opponents__title">•MANUFACTURER•</h2>
+          <p class="opponents__score">{{ item.manufacturer }}</p>
+        </div>
       </ng-container>
     </ng-template>
   </ng-template>
-</mat-card>
+</div>

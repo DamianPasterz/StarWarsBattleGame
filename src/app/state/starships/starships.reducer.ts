@@ -8,7 +8,7 @@ const reducer = createReducer(
   initialState,
 
   on(
-    actions.getSingleStarshipsPropertis.success,
+    actions.getSingleStarshipsProperties.success,
     (state, { starship }): StarshipsState => ({
       ...state,
       starships: starship,

@@ -18,6 +18,10 @@
   letter-spacing: 6px;
   line-height: 150%;
   text-align: justify;
+
+  &__button-container {
+    margin-top: 2rem;
+  }
 }
 
 .text {
@@ -25,6 +29,10 @@
   top: -100px;
   transform-origin: 50% 100%;
   color: var(--black-1);
+  & > p {
+    color: var(--yellow);
+    text-align: center;
+  }
 }
 
 .fade {

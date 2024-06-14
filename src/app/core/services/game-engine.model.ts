@@ -11,5 +11,5 @@ export enum BattleType {
 
 export interface WinType {
   opponent: string;
-  resault: GameOutcome;
+  result: GameOutcome;
 }

@@ -16,24 +16,31 @@ export interface ElementList {
   url: string;
 }
 
-export interface BaseResault {
+export interface BaseResult {
   description: string;
   _id: string;
   uid: string;
   __v: number;
 }
 
-export interface StarshipResult extends BaseResault {
+export interface StarshipResult extends BaseResult {
   properties: StarshipProperties;
 }
 
-export interface PeopleResult extends BaseResault {
+export interface PeopleResult extends BaseResult {
   properties: PeopleProperties;
+}
+export interface PlanetsResult extends BaseResult {
+  properties: PlanetProperties;
 }
 
 export interface StarshipResponse {
   message: string;
   result: StarshipResult;
+}
+export interface PlanetResponse {
+  message: string;
+  result: PlanetsResult;
 }
 
 export interface StarshipProperties {
@@ -74,6 +81,21 @@ export interface PeopleProperties {
   starships: string[];
   url: string;
   vehicles: string[];
+}
+
+export interface PlanetProperties {
+  diameter: string;
+  rotation_period: string;
+  orbital_period: string;
+  gravity: string;
+  population: string;
+  climate: string;
+  terrain: string;
+  surface_water: string;
+  created: string;
+  edited: string;
+  name: string;
+  url: string;
 }
 
 export interface PeopleResponse {

@@ -14,7 +14,7 @@ export class StarshipsEffects {
 
   getStarshipsAndProperties$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(actions.getListOfstarships.request),
+      ofType(actions.getListOfStarships.request),
       switchMap(() =>
         this.httpService.getStarShipsResource().pipe(
           concatMap(({ results }) => {
@@ -34,11 +34,11 @@ export class StarshipsEffects {
             );
 
             return forkJoin(allStarships).pipe(
-              map((properties) => actions.getSingleStarshipsPropertis.success({ starship: properties })),
-              catchError((error) => of(actions.getSingleStarshipsPropertis.failure({ error })))
+              map((properties) => actions.getSingleStarshipsProperties.success({ starship: properties })),
+              catchError((error) => of(actions.getSingleStarshipsProperties.failure({ error })))
             );
           }),
-          catchError((error) => of(actions.getListOfstarships.failure({ error })))
+          catchError((error) => of(actions.getListOfStarships.failure({ error })))
         )
       )
     );

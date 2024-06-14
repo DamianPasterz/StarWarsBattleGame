@@ -2,13 +2,39 @@
 @use 'base/_base-dir';
 @use 'components/_components-dir';
 
-.mat-mdc-card {
-  background-color: transparent !important;
-}
+// .mat-mdc-card {
+//   background-color: transparent !important;
+//   border: 0.2rem solid var(--white-1) !important;
+//   &:hover {
+//     border: 7px solid var(--brown-ligth-1) !important;
+//   }
+// }
 
 .mat-mdc-menu-content,
 .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
   background-color: var(--black-1);
   padding: 0 !important;
   padding: 1rem !important;
+}
+
+.mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
+  color: white !important;
+}
+
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs > .mat-mdc-tab-header .mat-mdc-tab {
+  border-bottom: 1px solid var(--brown-ligth-1);
+}
+
+.mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
+  border-bottom: 5px solid var(--brown-ligth-1);
+}
+.mdc-tab__text-label {
+  color: var(--white-1) !important;
+}
+
+.mat-mdc-focus-indicator {
+  position: initial;
+  border-bottom: 5px solid var(--brown-ligth-1);
 }

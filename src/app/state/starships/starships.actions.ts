@@ -3,14 +3,14 @@ import { BattleStats } from '@state/people';
 import { baseEvents } from '../utils/action-groups';
 import { Starship } from './starships.model';
 
-export const getListOfstarships = createActionGroup({
+export const getListOfStarships = createActionGroup({
   source: '[Globals] Get Starships',
   events: {
     ...baseEvents,
   },
 });
 
-export const getSingleStarshipsPropertis = createActionGroup({
+export const getSingleStarshipsProperties = createActionGroup({
   source: '[Globals] Get Single Starships Propertis',
   events: {
     ...baseEvents,

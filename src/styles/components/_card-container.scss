@@ -1,10 +1,11 @@
 .SW-cardContainer {
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
   .SW-cardContainer {
     flex-direction: column;
     align-items: center;

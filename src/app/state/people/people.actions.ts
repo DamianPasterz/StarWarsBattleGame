@@ -9,8 +9,8 @@ export const getListOfPeople = createActionGroup({
   },
 });
 
-export const getSinglePeoplePropertis = createActionGroup({
-  source: '[People] Get Single People Propertis',
+export const getSinglePeopleProperties = createActionGroup({
+  source: '[People] Get Single People Properties',
   events: {
     ...baseEvents,
     Request: props<{ id: string }>(),

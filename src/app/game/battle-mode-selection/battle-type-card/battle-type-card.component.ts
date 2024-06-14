@@ -8,5 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class BattleTypeCardComponent {
   @Input() title: string;
   @Input() routerLink: string[];
-  @Input() queryParams: any;
+  @Input() queryParams: string;
 }

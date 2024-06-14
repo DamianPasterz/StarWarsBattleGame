@@ -9,6 +9,7 @@ export const selectStarshipByIndex = (index: number) =>
   createSelector(selectStarship, (starshipState: StarshipsState) => starshipState.starships[index]);
 
 export const selectStarshipCount = createSelector(selectStarship, (state) => state.starships.length);
+export const selectStarshipeStats = createSelector(selectStarship, (state) => state.stats);
 
 export const selectStarshipStatsById = (id: string) =>
   createSelector(selectStarship, (starshipState: StarshipsState) => {

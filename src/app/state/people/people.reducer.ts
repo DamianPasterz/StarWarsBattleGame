@@ -9,7 +9,7 @@ const reducer = createReducer(
   initialState,
 
   on(
-    actions.getSinglePeoplePropertis.success,
+    actions.getSinglePeopleProperties.success,
     (state, { people }): PeopleState => ({
       ...state,
       people: people,

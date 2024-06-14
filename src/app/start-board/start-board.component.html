@@ -3,10 +3,13 @@
   <ng-container *ngIf="!showButton; else button">
     <div class="fade"></div>
     <div class="star-wars">
+      <div class="star-wars__button-container">
+        <button class="SW-button" (click)="skipAnimation()"><span>skip</span></button>
+      </div>
       <div class="text" (@textAnimation.done)="animationDone($event)" [@textAnimation]="textAnimationState">
         <div>
           <p>Episode IVX</p>
-          <p>Code & Pepper</p>
+          <p>APN Promise</p>
         </div>
         <p>I am Damian, a traveler through the digital space in search of challenges and opportunities.</p>
         <p>

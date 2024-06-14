@@ -1,65 +1,71 @@
-<div
-  class="game-container"
-  *ngIf="{
-    peopleOponents: peopleOponents$ | async,
-    starshipOponents: starshipOponents$ | async,
-    winner: winner$ | async
-  } as viewData"
->
-  <div class="SW-cardContainer" *ngIf="queryParams === 'people'; else starshipOpponents">
-    <app-battle-opponents-card
-      [item]="viewData.peopleOponents?.oponentOne"
-      (itemClicked)="selectRandomCharacterOrShip($event)"
-    ></app-battle-opponents-card>
-    <div class="play-container">
-      <div *ngIf="viewData.winner.resault === 'win'">
-        <h3 style="color: chartreuse">WINER:</h3>
-        <p style="color: beige">
-          {{ viewData.winner.opponent }}
-        </p>
-      </div>
-      <h3 *ngIf="viewData.winner.resault === 'tie'" style="color: rgb(238, 241, 35)">TIE</h3>
-
-      <button
-        class="SW-button"
-        *ngIf="viewData.peopleOponents?.oponentOne && viewData.peopleOponents?.oponentTwo"
-        (click)="fight()"
-      >
-        <span>Fight</span>
-      </button>
-    </div>
-    <app-battle-opponents-card
-      [item]="viewData.peopleOponents?.oponentTwo"
-      (itemClicked)="selectRandomCharacterOrShip($event)"
-    ></app-battle-opponents-card>
-  </div>
-
-  <ng-template #starshipOpponents>
-    <div class="SW-cardContainer">
+<div class="SW-full-center-flex-column">
+  <div
+    class="game-container"
+    *ngIf="{
+      peopleOpponents: peopleOpponents$ | async,
+      starshipOpponents: starshipOpponents$ | async,
+      winner: winner$ | async
+    } as viewData"
+  >
+    <div class="SW-cardContainer" *ngIf="queryParams === 'people'; else starshipOpponents">
       <app-battle-opponents-card
-        [item]="viewData.starshipOponents.oponentOne"
-        (itemClicked)="selectRandomCharacterOrShip($event)"
+        [item]="viewData.peopleOpponents?.opponentOne"
+        (idClicked)="handleIdClicked($event)"
+        (itemClicked)="selectRandomCharacterOrShip($event, 'opponentOne')"
       ></app-battle-opponents-card>
       <div class="play-container">
-        <div *ngIf="viewData.winner.resault === 'win'">
-          <h3 class="play-container__win">WINER:</h3>
-          <p style="color: beige">
+        <div *ngIf="viewData.winner.result === 'win'">
+          <h3 class="play-container__win">WINNER:</h3>
+          <p class="play-container__text">
             {{ viewData.winner.opponent }}
           </p>
         </div>
-        <h3 class="play-container__tie" *ngIf="viewData.winner.resault === 'tie'">TIE</h3>
+        <h3 class="play-container__tie" *ngIf="viewData.winner.result === 'tie'">TIE</h3>
+
         <button
           class="SW-button"
-          *ngIf="viewData.starshipOponents?.oponentOne && viewData.starshipOponents?.oponentTwo"
+          *ngIf="viewData.peopleOpponents?.opponentOne && viewData.peopleOpponents?.opponentTwo"
           (click)="fight()"
         >
           <span>Fight</span>
         </button>
       </div>
       <app-battle-opponents-card
-        [item]="viewData.starshipOponents.oponentTwo"
-        (itemClicked)="selectRandomCharacterOrShip($event)"
+        [item]="viewData.peopleOpponents?.opponentTwo"
+        (idClicked)="handleIdClicked($event)"
+        (itemClicked)="selectRandomCharacterOrShip($event, 'opponentTwo')"
       ></app-battle-opponents-card>
     </div>
-  </ng-template>
+
+    <ng-template #starshipOpponents>
+      <div class="SW-cardContainer">
+        <app-battle-opponents-card
+          [item]="viewData.starshipOpponents.opponentOne"
+          (idClicked)="handleIdClicked($event)"
+          (itemClicked)="selectRandomCharacterOrShip($event, 'opponentOne')"
+        ></app-battle-opponents-card>
+        <div class="play-container">
+          <div *ngIf="viewData.winner.result === 'win'">
+            <h3 class="play-container__win">WINNER:</h3>
+            <p style="color: beige">
+              {{ viewData.winner.opponent }}
+            </p>
+          </div>
+          <h3 class="play-container__tie" *ngIf="viewData.winner.result === 'tie'">TIE</h3>
+          <button
+            class="SW-button"
+            *ngIf="viewData.starshipOpponents?.opponentOne && viewData.starshipOpponents?.opponentTwo"
+            (click)="fight()"
+          >
+            <span>Fight</span>
+          </button>
+        </div>
+        <app-battle-opponents-card
+          [item]="viewData.starshipOpponents.opponentTwo"
+          (idClicked)="handleIdClicked($event)"
+          (itemClicked)="selectRandomCharacterOrShip($event, 'opponentTwo')"
+        ></app-battle-opponents-card>
+      </div>
+    </ng-template>
+  </div>
 </div>

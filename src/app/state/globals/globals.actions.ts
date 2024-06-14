@@ -5,19 +5,19 @@ import * as starshipActions from '@state/starships/starships.actions';
 export const showLoading = createAction('[Globals] loading', props<{ loading: boolean }>());
 
 export const actionsLoadingOn = [
-  starshipActions.getListOfstarships.request,
-  starshipActions.getSingleStarshipsPropertis.request,
+  starshipActions.getListOfStarships.request,
+  starshipActions.getSingleStarshipsProperties.request,
   peopleActions.getListOfPeople.request,
-  peopleActions.getSinglePeoplePropertis.request,
+  peopleActions.getSinglePeopleProperties.request,
 ];
 
 export const actionsLoadingOff = [
-  starshipActions.getListOfstarships.success,
-  starshipActions.getListOfstarships.failure,
-  starshipActions.getSingleStarshipsPropertis.success,
-  starshipActions.getSingleStarshipsPropertis.failure,
+  starshipActions.getListOfStarships.success,
+  starshipActions.getListOfStarships.failure,
+  starshipActions.getSingleStarshipsProperties.success,
+  starshipActions.getSingleStarshipsProperties.failure,
   peopleActions.getListOfPeople.success,
   peopleActions.getListOfPeople.failure,
-  peopleActions.getSinglePeoplePropertis.success,
-  peopleActions.getSinglePeoplePropertis.failure,
+  peopleActions.getSinglePeopleProperties.success,
+  peopleActions.getSinglePeopleProperties.failure,
 ];
