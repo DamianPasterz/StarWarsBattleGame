@@ -11,8 +11,8 @@ describe('BattleComponent', () => {
 
   beforeEach(async () => {
     const gameEngineServiceSpy = jasmine.createSpyObj('GameEngineService', [
-      'peopleOponentsObservable$',
-      'starshipOponentsObservable$',
+      'peopleOpponentsObservable$',
+      'starshipOpponentsObservable$',
       'winnerNameObservable$',
       'initialGame',
       'getRandomPeopleOpponent',
@@ -51,14 +51,14 @@ describe('BattleComponent', () => {
   it('should select random character when selectRandomCharacterOrShip is called with "people"', () => {
     component.ngOnInit();
     component.queryParams;
-    component.selectRandomCharacterOrShip(null);
+    component.selectRandomCharacterOrShip(null, null);
     expect(gameEngineService.getRandomPeopleOpponent).toHaveBeenCalled();
   });
 
   it('should not select random character or ship when selectRandomCharacterOrShip is called with name', () => {
     component.ngOnInit();
     component.queryParams;
-    component.selectRandomCharacterOrShip({ name: 'test', crew: 1, manufacturer: 'testM', id: '1' });
+    component.selectRandomCharacterOrShip({ name: 'test', crew: 1, manufacturer: 'testM', id: '1' }, 'opponentOne');
     expect(gameEngineService.getRandomPeopleOpponent).not.toHaveBeenCalled();
     expect(gameEngineService.getRandomStarshipOpponent).not.toHaveBeenCalled();
   });

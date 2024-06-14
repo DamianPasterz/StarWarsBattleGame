@@ -35,8 +35,8 @@ export class PeopleEffects {
             );
 
             return forkJoin(allPeople).pipe(
-              map((properties) => actions.getSinglePeoplePropertis.success({ people: properties })),
-              catchError((error) => of(actions.getSinglePeoplePropertis.failure({ error })))
+              map((properties) => actions.getSinglePeopleProperties.success({ people: properties })),
+              catchError((error) => of(actions.getSinglePeopleProperties.failure({ error })))
             );
           }),
           catchError((error) => of(actions.getListOfPeople.failure({ error })))

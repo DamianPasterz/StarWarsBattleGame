@@ -1,30 +1,23 @@
 import { createAction, props } from '@ngrx/store';
 import * as peopleActions from '@state/people/people.actions';
-import * as planetsActions from '@state/planets/planets.actions';
 import * as starshipActions from '@state/starships/starships.actions';
 
 export const showLoading = createAction('[Globals] loading', props<{ loading: boolean }>());
 
 export const actionsLoadingOn = [
-  starshipActions.getListOfstarships.request,
-  starshipActions.getSingleStarshipsPropertis.request,
+  starshipActions.getListOfStarships.request,
+  starshipActions.getSingleStarshipsProperties.request,
   peopleActions.getListOfPeople.request,
-  peopleActions.getSinglePeoplePropertis.request,
-  planetsActions.getListOfPlanets.request,
-  planetsActions.getSinglePlanetPropertis.request,
+  peopleActions.getSinglePeopleProperties.request,
 ];
 
 export const actionsLoadingOff = [
-  starshipActions.getListOfstarships.success,
-  starshipActions.getListOfstarships.failure,
-  starshipActions.getSingleStarshipsPropertis.success,
-  starshipActions.getSingleStarshipsPropertis.failure,
+  starshipActions.getListOfStarships.success,
+  starshipActions.getListOfStarships.failure,
+  starshipActions.getSingleStarshipsProperties.success,
+  starshipActions.getSingleStarshipsProperties.failure,
   peopleActions.getListOfPeople.success,
   peopleActions.getListOfPeople.failure,
-  peopleActions.getSinglePeoplePropertis.success,
-  peopleActions.getSinglePeoplePropertis.failure,
-  planetsActions.getListOfPlanets.success,
-  planetsActions.getListOfPlanets.failure,
-  planetsActions.getSinglePlanetPropertis.success,
-  planetsActions.getSinglePlanetPropertis.failure,
+  peopleActions.getSinglePeopleProperties.success,
+  peopleActions.getSinglePeopleProperties.failure,
 ];

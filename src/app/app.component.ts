@@ -7,6 +7,6 @@ import { GlobalsFacade } from '@state/globals';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private globaslFacade: GlobalsFacade) {}
-  public loading$ = this.globaslFacade.loading$;
+  constructor(private globalsFacade: GlobalsFacade) {}
+  public loading$ = this.globalsFacade.loading$;
 }

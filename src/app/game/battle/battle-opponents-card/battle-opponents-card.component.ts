@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-battle-opponents-card',
   templateUrl: './battle-opponents-card.component.html',
+  styleUrls: ['./battle-opponents-card.component.scss'],
   animations: [fadeInAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -19,9 +20,8 @@ export class BattleOpponentsCardComponent {
 
   constructor(private gameEngine: GameEngineService) {}
 
-  selectRandomCharacterOrShip(item: People | Starship) {
+  public selectRandomCharacterOrShip(item: People | Starship): void {
     this.itemClicked.emit(item);
-    console.log('clik', item?.id);
     if (item?.id) {
       this.stats$ = this.gameEngine.getStats(item.id);
     }

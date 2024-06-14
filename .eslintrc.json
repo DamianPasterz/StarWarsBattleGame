@@ -33,7 +33,7 @@
     {
       "files": ["*.html"],
       "extends": ["plugin:@angular-eslint/template/recommended"],
-      "rules": { "no-restricted-globals": ["", "gsap"] }
+      "rules": { "no-restricted-globals": ["off", "gsap"] }
     },
     {
       "files": ["*.ts"],

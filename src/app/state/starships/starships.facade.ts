@@ -18,7 +18,7 @@ export class StarshipsFacade {
   constructor(private store: Store<AppState>) {}
 
   public getStarships(): void {
-    this.store.dispatch(actions.getListOfstarships.request());
+    this.store.dispatch(actions.getListOfStarships.request());
   }
 
   public setStats(stats: BattleStats): void {

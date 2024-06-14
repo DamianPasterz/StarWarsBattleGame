@@ -1,0 +1,44 @@
+.choose-opponents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.opponents {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    color: var(--brown-light-1);
+    font-size: 2rem;
+  }
+
+  &__name {
+    text-align: center;
+  }
+
+  &__score {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1100px) {
+  .opponents {
+    &__title {
+      font-size: 1rem;
+      padding: 0;
+      line-height: 2rem;
+    }
+    &__name {
+      line-height: 1rem;
+      margin: 0.5rem;
+    }
+    &__score {
+      line-height: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+}

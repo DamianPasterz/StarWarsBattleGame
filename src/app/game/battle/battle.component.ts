@@ -14,13 +14,13 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BattleComponent implements OnInit {
-  public peopleOponents$: Observable<{
-    oponentOne: People;
-    oponentTwo: People;
+  public peopleOpponents$: Observable<{
+    opponentOne: People;
+    opponentTwo: People;
   }>;
-  public starshipOponents$: Observable<{
-    oponentOne: Starship;
-    oponentTwo: Starship;
+  public starshipOpponents$: Observable<{
+    opponentOne: Starship;
+    opponentTwo: Starship;
   }>;
 
   public winner$: Observable<WinType>;
@@ -30,8 +30,8 @@ export class BattleComponent implements OnInit {
     private route: ActivatedRoute,
     private gameEngine: GameEngineService
   ) {
-    this.peopleOponents$ = this.gameEngine.peopleOponentsObservable$;
-    this.starshipOponents$ = this.gameEngine.starshipOponentsObservable$;
+    this.peopleOpponents$ = this.gameEngine.peopleOpponentsObservable$;
+    this.starshipOpponents$ = this.gameEngine.starshipOpponentsObservable$;
     this.winner$ = this.gameEngine.winnerNameObservable$;
     this.queryParams = this.route.snapshot.queryParams['battle'];
   }
@@ -44,12 +44,11 @@ export class BattleComponent implements OnInit {
     this.gameEngine.initialGame(this.queryParams);
   }
 
-  public selectRandomCharacterOrShip(name: People | Starship): void {
-    // this.gameEngine.getStats(name?.id);
+  public selectRandomCharacterOrShip(name: People | Starship, position: 'opponentOne' | 'opponentTwo'): void {
     if (name !== null) return;
     this.queryParams === BattleType.People
-      ? this.gameEngine.getRandomPeopleOpponent()
-      : this.gameEngine.getRandomStarshipOpponent();
+      ? this.gameEngine.getRandomPeopleOpponent(position)
+      : this.gameEngine.getRandomStarshipOpponent(position);
   }
 
   public fight(): void {

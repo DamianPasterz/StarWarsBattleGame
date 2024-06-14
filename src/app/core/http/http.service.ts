@@ -19,16 +19,25 @@ export class HttpService extends BaseHttpService {
     HttpService.API_URL = this.config.API_URL || environment.API_URL;
   }
 
+  public numberOfPage = 1;
+  public itemOnPage = 65;
+
   getPeopleResource(): Observable<Response> {
-    const request = this.http.get<Response>(`${HttpService.API_URL}people?page=${1}&limit=${65}`);
+    const request = this.http.get<Response>(
+      `${HttpService.API_URL}people?page=${this.numberOfPage}&limit=${this.itemOnPage}`
+    );
     return this.handleRequest(request);
   }
   getStarShipsResource(): Observable<Response> {
-    const request = this.http.get<Response>(`${HttpService.API_URL}starships?page=${1}&limit=${65}`);
+    const request = this.http.get<Response>(
+      `${HttpService.API_URL}starships?page=${this.numberOfPage}&limit=${this.itemOnPage}`
+    );
     return this.handleRequest(request);
   }
   getPlanetsResource(): Observable<Response> {
-    const request = this.http.get<Response>(`${HttpService.API_URL}planets?page=${1}&limit=${65}`);
+    const request = this.http.get<Response>(
+      `${HttpService.API_URL}planets?page=${this.numberOfPage}&limit=${this.itemOnPage}`
+    );
     return this.handleRequest(request);
   }
 

@@ -2,9 +2,13 @@
 @use 'base/_base-dir';
 @use 'components/_components-dir';
 
-.mat-mdc-card {
-  background-color: transparent !important;
-}
+// .mat-mdc-card {
+//   background-color: transparent !important;
+//   border: 0.2rem solid var(--white-1) !important;
+//   &:hover {
+//     border: 7px solid var(--brown-ligth-1) !important;
+//   }
+// }
 
 .mat-mdc-menu-content,
 .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {

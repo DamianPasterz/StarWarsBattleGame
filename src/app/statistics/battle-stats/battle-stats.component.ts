@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { BattleStats, PeopleFacade } from '@state/people';
-import { Planet, PlanetsFacade } from '@state/planets';
 import { StarshipsFacade } from '@state/starships';
 import { Observable } from 'rxjs';
 
@@ -12,17 +11,11 @@ import { Observable } from 'rxjs';
 export class BattleStatsComponent {
   public peopleStats$: Observable<BattleStats[]>;
   public starshipStats$: Observable<BattleStats[]>;
-  public planetsList$: Observable<Planet[]>;
   constructor(
     private peopleFacade: PeopleFacade,
-    private starshipsFacade: StarshipsFacade,
-    private planetsFacade: PlanetsFacade
+    private starshipsFacade: StarshipsFacade
   ) {
     this.peopleStats$ = this.peopleFacade.allStats$;
     this.starshipStats$ = this.starshipsFacade.allStats$;
-    this.planetsFacade.getPlanets();
-    this.planetsList$ = this.planetsFacade.AllPlanets;
-
-    console.log(this.peopleStats$);
   }
 }

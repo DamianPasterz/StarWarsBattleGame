@@ -1,79 +1,67 @@
 import { Injectable } from '@angular/core';
 import { BattleStats, People, PeopleFacade } from '@state/people';
 import { Starship, StarshipsFacade } from '@state/starships';
-import { BehaviorSubject, Observable, of, switchMap, take } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { BattleType, GameOutcome, WinType } from './game-engine.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameEngineService {
-  private battleType: string = '';
+  private battleType = '';
 
-  private peopleOponents$ = new BehaviorSubject<{
-    oponentOne: People | null;
-    oponentTwo: People | null;
-  }>({ oponentOne: null, oponentTwo: null });
-  public peopleOponentsObservable$: Observable<{
-    oponentOne: People | null;
-    oponentTwo: People | null;
-  }> = this.peopleOponents$.asObservable();
+  private peopleOpponents$ = new BehaviorSubject<{
+    opponentOne: People | null;
+    opponentTwo: People | null;
+  }>({ opponentOne: null, opponentTwo: null });
+  public peopleOpponentsObservable$: Observable<{
+    opponentOne: People | null;
+    opponentTwo: People | null;
+  }> = this.peopleOpponents$.asObservable();
 
-  private starshipOponents$ = new BehaviorSubject<{
-    oponentOne: Starship | null;
-    oponentTwo: Starship | null;
-  }>({ oponentOne: null, oponentTwo: null });
-  public starshipOponentsObservable$: Observable<{
-    oponentOne: Starship | null;
-    oponentTwo: Starship | null;
-  }> = this.starshipOponents$.asObservable();
+  private starshipOpponents$ = new BehaviorSubject<{
+    opponentOne: Starship | null;
+    opponentTwo: Starship | null;
+  }>({ opponentOne: null, opponentTwo: null });
+  public starshipOpponentsObservable$: Observable<{
+    opponentOne: Starship | null;
+    opponentTwo: Starship | null;
+  }> = this.starshipOpponents$.asObservable();
 
-  public winnerName$ = new BehaviorSubject<WinType>({ opponent: '', resault: null });
+  public winnerName$ = new BehaviorSubject<WinType>({ opponent: '', result: null });
   public winnerNameObservable$: Observable<WinType> = this.winnerName$.asObservable();
 
-  public stats$: BattleStats[];
-  // public statsObservable$: Observable<BattleStats[]> = this.stats$.asObservable();
+  private stats$: BattleStats[];
 
   constructor(
     private starshipFacade: StarshipsFacade,
     private peopleFacade: PeopleFacade
   ) {
-    this.peopleFacade.allStats$.subscribe((stast) => (this.stats$ = stast));
+    this.peopleFacade.allStats$.subscribe((stats) => (this.stats$ = stats));
   }
 
   public initialGame(params: string): void {
     this.battleType = params;
-    this.winnerName$.next({ opponent: '', resault: null });
-    this.peopleOponents$.next({ oponentOne: null, oponentTwo: null });
-    this.starshipOponents$.next({ oponentOne: null, oponentTwo: null });
+    this.resetOpponents();
+    this.winnerName$.next({ opponent: '', result: null });
+  }
+
+  private resetOpponents(): void {
+    this.peopleOpponents$.next({ opponentOne: null, opponentTwo: null });
+    this.starshipOpponents$.next({ opponentOne: null, opponentTwo: null });
   }
 
   public getRandomOpponentIndex(facade: PeopleFacade | StarshipsFacade): Observable<number> {
-    return facade.count$.pipe(
-      switchMap((count) => {
-        const index = Math.floor(Math.random() * count);
-        return of(index);
-      })
-    );
+    return facade.count$.pipe(switchMap((count) => of(Math.floor(Math.random() * count))));
   }
 
   private getRandomOpponent<T>(facade: PeopleFacade | StarshipsFacade, index: number): Observable<T> {
-    if (facade instanceof PeopleFacade) {
-      return facade.selectByIndex(index) as Observable<T>;
-    } else if (facade instanceof StarshipsFacade) {
-      return facade.selectByIndex(index) as Observable<T>;
-    } else {
-      throw new Error('Unknown facade type');
-    }
+    return facade.selectByIndex(index) as Observable<T>;
   }
 
   public updateOrAddStats(entity: People | Starship, entityType: BattleType, outcome: GameOutcome): void {
-    let facade: PeopleFacade | StarshipsFacade;
-    if (entityType === BattleType.People) {
-      facade = this.peopleFacade;
-    } else if (entityType === BattleType.Starship) {
-      facade = this.starshipFacade;
-    }
+    const facade = entityType === BattleType.People ? this.peopleFacade : this.starshipFacade;
 
     if (facade) {
       facade
@@ -85,18 +73,16 @@ export class GameEngineService {
           updatedStats.name = entity.name;
           facade.setStats(updatedStats);
         });
+
+      if (outcome !== GameOutcome.Loss) {
+        this.winnerName$.next({ opponent: entity.name, result: outcome });
+      }
     } else {
       throw new Error('Unknown entity type');
     }
-    if (outcome === GameOutcome.Win) {
-      this.winnerName$.next({ opponent: entity.name, resault: GameOutcome.Win });
-    }
-    if (outcome === GameOutcome.Tie) {
-      this.winnerName$.next({ opponent: entity.name, resault: GameOutcome.Tie });
-    }
   }
 
-  private calculateUpdatedStats(existingStats: any, outcome: GameOutcome): BattleStats {
+  private calculateUpdatedStats(existingStats: BattleStats, outcome: GameOutcome): BattleStats {
     return {
       id: existingStats.id,
       name: existingStats.name,
@@ -106,34 +92,27 @@ export class GameEngineService {
     };
   }
 
-  public getRandomPeopleOpponent(): void {
-    this.getRandomOpponentIndex(this.peopleFacade).subscribe((index) => {
-      this.getRandomOpponent<People>(this.peopleFacade, index).subscribe((person) => {
-        const currentOpponents = this.peopleOponents$.getValue();
-        if (currentOpponents.oponentOne === null) {
-          this.peopleOponents$.next({ ...currentOpponents, oponentOne: person });
-        } else if (currentOpponents.oponentTwo === null) {
-          this.peopleOponents$.next({ ...currentOpponents, oponentTwo: person });
-        }
+  private assignOpponent<T>(
+    facade: PeopleFacade | StarshipsFacade,
+    opponents$: BehaviorSubject<{ opponentOne: T | null; opponentTwo: T | null }>,
+    position: 'opponentOne' | 'opponentTwo'
+  ): void {
+    this.getRandomOpponentIndex(facade).subscribe((index) => {
+      this.getRandomOpponent<T>(facade, index).subscribe((opponent) => {
+        const currentOpponents = opponents$.getValue();
+        opponents$.next({ ...currentOpponents, [position]: opponent });
       });
     });
-    this.winnerName$.next({ opponent: '', resault: null });
   }
 
-  public getRandomStarshipOpponent(): void {
-    this.getRandomOpponentIndex(this.starshipFacade).subscribe((index) => {
-      this.getRandomOpponent<Starship>(this.starshipFacade, index).subscribe((starship) => {
-        const currentOpponents = this.starshipOponents$.getValue();
-        if (currentOpponents.oponentOne === null) {
-          this.starshipOponents$.next({ ...currentOpponents, oponentOne: starship });
-        } else if (currentOpponents.oponentTwo === null) {
-          this.starshipOponents$.next({ ...currentOpponents, oponentTwo: starship });
-        } else {
-          console.error('Both opponents are already assigned.');
-        }
-      });
-    });
-    this.winnerName$.next({ opponent: '', resault: null });
+  public getRandomPeopleOpponent(position: 'opponentOne' | 'opponentTwo'): void {
+    this.assignOpponent<People>(this.peopleFacade, this.peopleOpponents$, position);
+    this.winnerName$.next({ opponent: '', result: null });
+  }
+
+  public getRandomStarshipOpponent(position: 'opponentOne' | 'opponentTwo'): void {
+    this.assignOpponent<Starship>(this.starshipFacade, this.starshipOpponents$, position);
+    this.winnerName$.next({ opponent: '', result: null });
   }
 
   public fight(): void {
@@ -141,55 +120,60 @@ export class GameEngineService {
   }
 
   private peopleFight(): void {
-    this.peopleOponents$.pipe(take(1)).subscribe((opponents) => {
-      if (!opponents.oponentOne || !opponents.oponentTwo) {
+    this.peopleOpponents$.pipe(take(1)).subscribe((opponents) => {
+      if (!opponents.opponentOne || !opponents.opponentTwo) {
         console.error('Not enough opponents to fight.');
         return;
       }
 
-      if (opponents.oponentOne.mass > opponents.oponentTwo.mass) {
-        this.updateOrAddStats(opponents.oponentOne, BattleType.People, GameOutcome.Win);
-        this.updateOrAddStats(opponents.oponentTwo, BattleType.People, GameOutcome.Loss);
-        this.peopleOponents$.next({ oponentOne: opponents.oponentOne, oponentTwo: null });
-      } else if (opponents.oponentOne.mass < opponents.oponentTwo.mass) {
-        this.updateOrAddStats(opponents.oponentTwo, BattleType.People, GameOutcome.Win);
-        this.updateOrAddStats(opponents.oponentOne, BattleType.People, GameOutcome.Loss);
-        this.peopleOponents$.next({ oponentOne: null, oponentTwo: opponents.oponentTwo });
-      } else {
-        this.updateOrAddStats(opponents.oponentOne, BattleType.People, GameOutcome.Tie);
-        this.updateOrAddStats(opponents.oponentTwo, BattleType.People, GameOutcome.Tie);
-        this.peopleOponents$.next({ oponentOne: null, oponentTwo: null });
-      }
+      const result = this.resolveFight(opponents.opponentOne.mass, opponents.opponentTwo.mass);
+      this.updateOrAddStats(opponents.opponentOne, BattleType.People, result.opponentOneOutcome);
+      this.updateOrAddStats(opponents.opponentTwo, BattleType.People, result.opponentTwoOutcome);
+      this.resetOpponents();
     });
   }
 
   private starshipFight(): void {
-    this.starshipOponents$.pipe(take(1)).subscribe((opponents) => {
-      if (!opponents.oponentOne || !opponents.oponentTwo) {
+    this.starshipOpponents$.pipe(take(1)).subscribe((opponents) => {
+      if (!opponents.opponentOne || !opponents.opponentTwo) {
         console.error('Not enough opponents to fight.');
         return;
       }
 
-      if (opponents.oponentOne.crew > opponents.oponentTwo.crew) {
-        this.updateOrAddStats(opponents.oponentOne, BattleType.Starship, GameOutcome.Win);
-        this.updateOrAddStats(opponents.oponentTwo, BattleType.Starship, GameOutcome.Loss);
-        this.starshipOponents$.next({ oponentOne: opponents.oponentOne, oponentTwo: null });
-      } else if (opponents.oponentOne.crew < opponents.oponentTwo.crew) {
-        this.updateOrAddStats(opponents.oponentTwo, BattleType.Starship, GameOutcome.Win);
-        this.updateOrAddStats(opponents.oponentOne, BattleType.Starship, GameOutcome.Loss);
-        this.starshipOponents$.next({ oponentOne: null, oponentTwo: opponents.oponentTwo });
-      } else {
-        this.updateOrAddStats(opponents.oponentOne, BattleType.Starship, GameOutcome.Tie);
-        this.updateOrAddStats(opponents.oponentTwo, BattleType.Starship, GameOutcome.Tie);
-        this.starshipOponents$.next({ oponentOne: null, oponentTwo: null });
-      }
+      const result = this.resolveFight(opponents.opponentOne.crew, opponents.opponentTwo.crew);
+      this.updateOrAddStats(opponents.opponentOne, BattleType.Starship, result.opponentOneOutcome);
+      this.updateOrAddStats(opponents.opponentTwo, BattleType.Starship, result.opponentTwoOutcome);
+      this.resetOpponents();
     });
   }
 
-  public getStats(id: string): Observable<BattleStats> {
-    if (id === undefined) return of();
-    else {
-      return this.peopleFacade.selectStatsById(id);
+  private resolveFight(
+    statOne: number,
+    statTwo: number
+  ): {
+    opponentOneOutcome: GameOutcome;
+    opponentTwoOutcome: GameOutcome;
+    updatedOpponents: { opponentOne: People | Starship | null; opponentTwo: People | Starship | null };
+  } {
+    let opponentOneOutcome: GameOutcome;
+    let opponentTwoOutcome: GameOutcome;
+
+    if (statOne > statTwo) {
+      opponentOneOutcome = GameOutcome.Win;
+      opponentTwoOutcome = GameOutcome.Loss;
+    } else if (statOne < statTwo) {
+      opponentOneOutcome = GameOutcome.Loss;
+      opponentTwoOutcome = GameOutcome.Win;
+    } else {
+      opponentOneOutcome = GameOutcome.Tie;
+      opponentTwoOutcome = GameOutcome.Tie;
     }
+
+    const updatedOpponents = { opponentOne: null, opponentTwo: null };
+    return { opponentOneOutcome, opponentTwoOutcome, updatedOpponents };
+  }
+
+  public getStats(id: string): Observable<BattleStats> {
+    return id ? this.peopleFacade.selectStatsById(id) : of(null);
   }
 }

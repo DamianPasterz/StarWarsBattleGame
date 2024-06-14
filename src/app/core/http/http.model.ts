@@ -16,21 +16,21 @@ export interface ElementList {
   url: string;
 }
 
-export interface BaseResault {
+export interface BaseResult {
   description: string;
   _id: string;
   uid: string;
   __v: number;
 }
 
-export interface StarshipResult extends BaseResault {
+export interface StarshipResult extends BaseResult {
   properties: StarshipProperties;
 }
 
-export interface PeopleResult extends BaseResault {
+export interface PeopleResult extends BaseResult {
   properties: PeopleProperties;
 }
-export interface PlanetsResult extends BaseResault {
+export interface PlanetsResult extends BaseResult {
   properties: PlanetProperties;
 }
 

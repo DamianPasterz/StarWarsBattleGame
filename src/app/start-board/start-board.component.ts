@@ -18,6 +18,10 @@ export class StartBoardComponent {
     this.textAnimationState = 'start';
   }
 
+  skipAnimation(): void {
+    this.textAnimationState = 'start';
+  }
+
   animationDone(event: AnimationEvent): void {
     this.textAnimationState = 'end';
 

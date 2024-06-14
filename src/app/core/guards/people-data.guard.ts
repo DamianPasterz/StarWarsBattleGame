@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 import { Actions } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { checkActionSuccess } from '@shared/utils/check-action-success';
 import { AppState } from '@state/index';
-import { PeopleFacade, getSinglePeoplePropertis } from '@state/people';
+import { PeopleFacade, getSinglePeopleProperties } from '@state/people';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -19,17 +19,22 @@ export class PeopleDataGuardService {
   ) {}
 
   canActivate: CanActivateFn = (): Observable<boolean> => {
-    return this.store.pipe(
-      select((state) => state.people.people.length > 0),
-      switchMap((peopleLoaded) => {
-        if (peopleLoaded) {
-          return of(true);
-        } else {
-          this.peopleFacade.getPeople();
+    return this.store
+      .select((state) => state.people.people.length > 0)
+      .pipe(
+        switchMap((peopleLoaded) => {
+          if (peopleLoaded) {
+            return of(true);
+          } else {
+            this.peopleFacade.getPeople();
 
-          return checkActionSuccess(this.actions$, getSinglePeoplePropertis.success, getSinglePeoplePropertis.failure);
-        }
-      })
-    );
+            return checkActionSuccess(
+              this.actions$,
+              getSinglePeopleProperties.success,
+              getSinglePeopleProperties.failure
+            );
+          }
+        })
+      );
   };
 }

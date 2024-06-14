@@ -15,26 +15,23 @@ export class BattleStatsChartComponent implements AfterViewInit, OnInit {
   @ViewChild('chartContainer') chartContainer: ElementRef;
 
   @Input() stats: BattleStats;
-  public dounatData: BattleStats;
-
-  constructor() {}
+  public donutData: BattleStats;
 
   ngOnInit(): void {
-    this.dounatData = this.stats;
+    this.donutData = this.stats;
   }
 
   ngAfterViewInit(): void {
     this.createChart();
-    console.log('czym jestem', this.dounatData);
   }
 
   public createChart(): void {
-    if (!this.dounatData) {
+    if (!this.donutData) {
       console.error('Data is not available for chart creation.');
       return;
     }
     const container = d3.select(this.chartContainer.nativeElement);
-    const data = this.dounatData;
+    const data = this.donutData;
 
     const totalWins = data.win;
     const totalLosses = data.loss;
