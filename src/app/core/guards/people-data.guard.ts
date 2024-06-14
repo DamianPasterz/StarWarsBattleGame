@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
 import { checkActionSuccess } from '@shared/utils/check-action-success';
 import { AppState } from '@state/index';
 import { PeopleFacade, getSinglePeopleProperties } from '@state/people';
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BattleStats, People, PeopleFacade } from '@state/people';
-import { Starship, StarshipsFacade } from '@state/starships';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
+
+import { BattleStats, People, PeopleFacade } from '@state/people';
+import { Starship, StarshipsFacade } from '@state/starships';
 import { BattleType, GameOutcome, WinType } from './game-engine.model';
 
 @Injectable({

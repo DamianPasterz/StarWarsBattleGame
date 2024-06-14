@@ -1,5 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { Component } from '@angular/core';
+
 import { textAnimation } from '@shared/animations/text.animation';
 import { GlobalsFacade } from '@state/globals';
 

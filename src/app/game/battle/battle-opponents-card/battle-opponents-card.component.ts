@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { GameEngineService } from '@core/services/game-engine.service';
 import { fadeInAnimation } from '@shared/animations/fadeIn.animation';
 import { BattleStats, People } from '@state/people/people.model';
 import { Starship } from '@state/starships/starships.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-battle-opponents-card',

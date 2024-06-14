@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
+
 import { MaterialModule } from '@app/material.module';
 import { DataLoadedGuard } from '@core/guards/data-loaded.guard';
 import { StarshipDataGuardService } from '@core/guards/starship-data.guard';

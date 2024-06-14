@@ -57,6 +57,5 @@ export class BattleComponent implements OnInit {
 
   public handleIdClicked(itemId: string): void {
     this.gameEngine.getStats(itemId);
-    console.log('Item ID clicked:', itemId);
   }
 }

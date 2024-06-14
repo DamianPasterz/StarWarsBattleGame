@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { BattleStats, PeopleFacade } from '@state/people';
 import { StarshipsFacade } from '@state/starships';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-battle-stats',

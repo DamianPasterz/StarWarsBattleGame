@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { StartBoardComponent } from './start-board/start-board.component';
 
 const routes: Routes = [
